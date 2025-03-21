@@ -8,6 +8,7 @@ const cheerio = require('cheerio');
 
     const FINAL_URL = `https://www.stillwhite.com/shop?size=${12}&price=${PRICE}&`
 
+
     // Function to parse dress info from the HTML class element
     const parseHtmlDress = (dress) => {
         // $ at the end of a variable indicates a cheerio object
@@ -34,18 +35,19 @@ const cheerio = require('cheerio');
         return newStr;
     }
 
+
     // Search for Wtoo dresses under $1200
     const response = await fetch(FINAL_URL + "q=wtoo");
     
     const $ = cheerio.load(await response.text());
     
+
     const dressesText = $('.item-title').toArray().map((e) => $(e).text());
     const dresses = dressesText.map((dress) => (
         parseHtmlDress(dress)
     ));
 
     dresses.map((dress) => console.log(dress));
-
 
 
 }) ();
